@@ -1,0 +1,38 @@
+# oh-my-zsh
+ZSH=/home/altenpts/progs/oh-my-zsh
+ZSH_THEME="jordy"
+plugins=(git archlinux)
+source $ZSH/oh-my-zsh.sh
+
+bindkey -v
+unsetopt auto_menu
+unsetopt correct_all
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
+# environment
+export EDITOR=vim
+export PATH=$HOME/bin:/usr/lib/ccache/bin:$PATH
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+# quick
+alias l='ls -alh'
+alias g='grep -nriI --exclude={tags,cscope.out} --exclude-dir="\.git"'
+alias c='cd ~/code/configs'
+
+# arch
+alias packer='packer --auronly --noedit'
+alias power='sudo cpupower frequency-set -g performance'
+
+# media
+alias yt='youtube-dl --extract-audio'
+alias bassdrive='mplayer http://amsterdam1.serverhostingcenter.streams.bassdrive.com:8000'
+
+# werk
+export PATH=$PATH:$HOME/data/toolchain/bin
+
+alias t='picocom -b 115200 /dev/ttyUSB0'
+alias s='source ~/code/benchmark/setup'
+alias u='cd ~/code/benchmark/src/u-boot'
+

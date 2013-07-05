@@ -1,0 +1,48 @@
+set nocp
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set smarttab
+set background=dark
+set nowrap
+set hlsearch
+set incsearch
+set nocompatible
+set nobackup
+set noswapfile
+
+syntax enable
+
+let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_WinWidth=40
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+" Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
+" This offers intelligent C++ completion when typing ‘.’ ‘->’ or <C-o>
+" Load standard tag files
+" set tags+=~/.vim/tags/cpp
+" set tags+=~/.vim/tags/gl
+" set tags+=~/.vim/tags/sdl
+" set tags+=~/.vim/tags/qt4
+
+:map <silent> <F1> :make -j4<CR><CR><CR> :copen <CR>
+nnoremap <silent> <F2> :TlistToggle<CR>
+:map <silent> <F3> :exec "vimgrep! /" . expand("<cword>") . "/j **/*.c **/*.cpp **/*.cc **/*.h"<cr> :copen <CR>
+:map <silent> <F4> :cn <CR>
+:map <silent> <F5> :ccl <CR>
+:map <silent> <F6> :make -C build -j2<CR><CR><CR> :copen<CR>
+:map <silent> <F7> :!c2c<CR><CR><CR> :copen <CR>
+:map <silent> <F8> :make<CR><CR><CR>
+:map <silent> <F10> :!ctags -R<CR><CR>
+:map <F12> :qa!<CR><CR>
+autocmd BufNewFile  *.h 0r ~/.vim/skeletons/skeleton.h | call ModHeader()
+autocmd BufNewFile  Makefile 0r ~/.vim/skeletons/Makefile
+:map - 6<C-W>-
+:map + 6<C-W>+
+
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command Wq :execute ':W' | :q 
+

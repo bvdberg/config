@@ -1,0 +1,34 @@
+[user]
+	name = Bas van den Berg
+	email = b.van.den.berg.nl@gmail.com
+[alias]
+    st = status
+    cm = checkout master
+    po = remote prune origin
+    cc = clean -f -d
+    co = checkout
+    mm = merge master
+    ss = diff --shortstat
+    wd = diff --color-words
+[core]
+    editor = vim
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[http]
+	sslVerify = false
+[sendemail]
+	chainreplyto = false
+    smtpencryption = tls
+    smtpserver = smtp.gmail.com
+    smtpuser = b.van.den.berg.nl@gmail.com
+    smtpserverport = 587
+[imap]
+        folder = "[Gmail]/Drafts"
+        host = imaps://imap.gmail.com
+        user = b.van.den.berg.nl@gmail.com
+        port = 993
+        sslverify = falsex 
+[push]
+	default = tracking
