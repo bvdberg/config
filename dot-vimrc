@@ -10,7 +10,7 @@ set hlsearch
 set incsearch
 set nocompatible
 set nobackup
-set noswapfile
+" set noswapfile
 
 syntax enable
 
@@ -35,11 +35,16 @@ nnoremap <silent> <F2> :TlistToggle<CR>
 :map <silent> <F5> :ccl <CR>
 :map <silent> <F6> :make -C build -j2<CR><CR><CR> :copen<CR>
 :map <silent> <F7> :!c2c<CR><CR><CR> :copen <CR>
-:map <silent> <F8> :make<CR><CR><CR>
+:map <silent> <F9> :make<CR><CR><CR> :copen <CR>
 :map <silent> <F10> :!ctags -R<CR><CR>
 :map <F12> :qa!<CR><CR>
+map <C-K> :pyf ~/bin/clang-format.py<CR>
+imap <C-K> <ESC>:pyf ~/bin/clang-format.py<CR>i
 autocmd BufNewFile  *.h 0r ~/.vim/skeletons/skeleton.h | call ModHeader()
 autocmd BufNewFile  Makefile 0r ~/.vim/skeletons/Makefile
+autocmd BufNewFile  *.c2 0r ~/.vim/skeletons/skeleton.c2
+au BufRead,BufNewFile *.c2     setfiletype c2.c
+au BufRead,BufNewFile *.c2t     setfiletype c2.c
 :map - 6<C-W>-
 :map + 6<C-W>+
 
