@@ -1,4 +1,4 @@
-#ifndef <HEADER> 
+#ifndef <HEADER>
 #define <HEADER>
 
 namespace mynamespace {

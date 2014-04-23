@@ -1,0 +1,5 @@
+package test;
+
+public func int main() {
+    return 0;
+}
