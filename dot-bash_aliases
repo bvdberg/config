@@ -8,3 +8,4 @@ alias c2='cd ~/prive/code/c2'
 alias c3='cd ~/prive/code/c2compiler/c2c'
 alias yy='echo exporting LLVM-3.2; export PATH=$PATH:/home/altenpts/llvm-3.2/bin'
 alias zz='echo exporting LLVM_C2; export PATH=$PATH:/home/altenpts/llvm-c2/bin
+alias e='vim'
