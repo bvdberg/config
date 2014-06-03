@@ -1,5 +1,6 @@
-package test;
+module test;
 
 public func int main() {
     return 0;
 }
+
