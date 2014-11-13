@@ -1,2 +1,7 @@
 Resize/Draw R-mouse button:
 gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+
+
+multilib:
+gcc-multilib
+g++-multilib
