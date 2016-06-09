@@ -1,6 +1,6 @@
 [user]
 	name = Bas van den Berg
-	email = b.van.den.berg.nl@gmail.com
+	email = bas.van-den-berg@nl.abb.com
 [alias]
     st = status
     cm = checkout master
@@ -10,6 +10,8 @@
     mm = merge master
     ss = diff --shortstat
     wd = diff --color-words
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+    tags = log --tags --simplify-by-decoration --pretty='format:%Cred%h%Creset %ai %d %C(bold blue)<%an>%Creset'
 [core]
     editor = vim
 [color]
@@ -18,17 +20,5 @@
 	branch = auto
 [http]
 	sslVerify = false
-[sendemail]
-	chainreplyto = false
-    smtpencryption = tls
-    smtpserver = smtp.gmail.com
-    smtpuser = b.van.den.berg.nl@gmail.com
-    smtpserverport = 587
-[imap]
-        folder = "[Gmail]/Drafts"
-        host = imaps://imap.gmail.com
-        user = b.van.den.berg.nl@gmail.com
-        port = 993
-        sslverify = falsex 
 [push]
 	default = tracking
