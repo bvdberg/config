@@ -1,5 +1,6 @@
 alias gg='git status'
 alias gb='git branch'
+alias gp='git pull'
 alias gd='git diff'
 alias c2='cd ~/code/c2'
 alias c3='cd ~/code/c2compiler; source ./env.sh'
