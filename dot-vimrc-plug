@@ -1,0 +1,116 @@
+set nocp
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set smarttab
+set background=dark
+set nowrap
+set hlsearch
+set incsearch
+set nocompatible
+set nobackup
+" set noswapfile
+
+syntax enable
+
+let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_WinWidth=40
+
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/vim-easy-align'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+" Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
+Plug 'honza/vim-snippets'
+call plug#end()
+
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+" Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
+" This offers intelligent C++ completion when typing ‘.’ ‘->’ or <C-o>
+" Load standard tag files
+" set tags+=~/.vim/tags/cpp
+" set tags+=~/.vim/tags/gl
+" set tags+=~/.vim/tags/sdl
+" set tags+=~/.vim/tags/qt4
+
+:map <silent> <F1> :make -j4<CR><CR><CR> :copen <CR>
+nnoremap <silent> <F2> :TlistToggle<CR>
+:map <silent> <F3> :exec "vimgrep! /" . expand("<cword>") . "/j **/*.c **/*.cpp **/*.cc **/*.h"<cr> :copen <CR>
+:map <silent> <F4> :cn <CR>
+:map <silent> <F5> :ccl <CR>
+:map <silent> <F6> :make -C build -j2<CR><CR><CR> :copen<CR>
+:map <silent> <F7> :!c2c<CR><CR><CR> :copen <CR>
+:map <silent> <F9> :make<CR><CR><CR> :copen <CR>
+:map <silent> <F10> :!ctags -R<CR><CR>
+:map <F12> :qa!<CR><CR>
+map <C-K> :pyf ~/bin/clang-format.py<CR>
+imap <C-K> <ESC>:pyf ~/bin/clang-format.py<CR>i
+autocmd BufNewFile  *.h 0r ~/.vim/skeletons/skeleton.h | call ModHeader()
+autocmd BufNewFile  Makefile 0r ~/.vim/skeletons/Makefile
+autocmd BufNewFile  *.c2 0r ~/.vim/skeletons/skeleton.c2
+au BufRead,BufNewFile *.c2     set filetype=c
+au BufRead,BufNewFile *.c2i    set filetype=c
+:map - 6<C-W>-
+:map + 6<C-W>+
+
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command Wq :execute ':W' | :q
+
+nnoremap <silent> <c-h> :call GetTagResult()<CR>
+
+function! GetTagResult()
+  " get cursor position and word
+  let l:src_file = bufname('%')
+  let l:line = line('.')
+  let l:column = col('.')
+
+  " search reference destination
+  let l:cmd = 'c2tags ' . l:src_file . ' ' . l:line . ' ' . l:column
+  let l:result = substitute(system(l:cmd), '[\]\|[[:cntrl:]]', '', 'g')
+
+  " parse results
+  let l:words = split(l:result, ' ')
+  if (l:words[0] == 'error')
+      echo l:result
+      return
+  endif
+  if (l:words[0] == 'multiple')
+      echo "multiple matches found. not supported yet"
+      return
+  endif
+  if (len(l:words) != 4)
+      "echo "no results found"
+      return
+  endif
+
+  " otherwise c2tags returns: 'found file line col'
+  let l:dst_file = l:words[1]
+  let l:dst_line = l:words[2]
+  let l:dst_col = l:words[3]
+
+  " add position to jumplist
+  normal! m`
+
+  let l:nr = bufnr("")
+  if (l:src_file != l:dst_file)
+      let l:nr = bufnr(l:dst_file, 1)
+      "let l:nr = bufnr("bar.c2", 1)
+      if (l:nr == -1)
+          echo "error creating buffer"
+          return
+      endif
+      execute ":buffer ".l:nr
+  endif
+
+  " TODO push to tag stack for Ctrl-T
+  let l:res = setpos('.', [0, l:dst_line, l:dst_col, 0])
+  if (l:res == -1)
+      echo "c2tags: cannot set position to:" l:dst_file l:dst_line l:dst_col
+      return
+  endif
+endfunction
+
