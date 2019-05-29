@@ -1,5 +1,5 @@
 
-target foo
+executable foo
     $warnings no-unused
     $generate-c single-module no-build
     file1.c2
