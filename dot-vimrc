@@ -38,15 +38,14 @@ match ExtraWhitespace /\s\+$/
 " set tags+=~/.vim/tags/sdl
 " set tags+=~/.vim/tags/qt4
 
-:map <silent> <F1> :make -j4<CR><CR><CR> :copen <CR>
+:map <silent> <F1> :make -j16<CR><CR><CR> :copen <CR>
 nnoremap <silent> <F2> :TlistToggle<CR>
 :map <silent> <F3> :exec "vimgrep! /" . expand("<cword>") . "/j **/*.c **/*.cpp **/*.cc **/*.h"<cr> :copen <CR>
 :map <silent> <F4> :cn <CR>
 :map <silent> <F5> :ccl <CR>
-:map <silent> <F6> :make -C build -j4<CR><CR><CR> :copen<CR>
+:map <silent> <F6> :make -C build -j16<CR><CR><CR> :copen<CR>
 :map <silent> <F7> :make --check<CR><CR><CR> :copen <CR>
-:map <silent> <F9> :make<CR><CR><CR> :copen <CR>
-:map <silent> <F9> :make<CR><CR><CR> :copen <CR>
+:map <silent> <F9> :make -j16<CR><CR><CR> :copen <CR>
 :map <silent> <F10> :!ctags -R<CR><CR>
 :map <F12> :qa!<CR><CR>
 map <C-K> :pyf ~/bin/clang-format.py<CR>
