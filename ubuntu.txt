@@ -8,3 +8,5 @@ g++-multilib
 meson
 ninja
 cmake
+
+ripgrep
