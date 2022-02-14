@@ -40,13 +40,15 @@ match ExtraWhitespace /\s\+$/
 
 :map <silent> <F1> :make -j16<CR><CR><CR> :copen <CR>
 nnoremap <silent> <F2> :TlistToggle<CR>
-:map <silent> <F3> :exec "vimgrep! /" . expand("<cword>") . "/j **/*.c **/*.cpp **/*.cc **/*.h"<cr> :copen <CR>
+":map <silent> <F3> :exec "vimgrep! /" . expand("<cword>") . "/j **/*.c **/*.cpp **/*.cc **/*.h"<cr> :copen <CR>
+":map <silent> <F3> :!rg --vimgrep " expand("<cword>")<CR> :copen <CR>
+:map <silent> <F3> :Rg <CR> :copen <CR>
 :map <silent> <F4> :cn <CR>
 :map <silent> <F5> :ccl <CR>
 :map <silent> <F6> :make -C build -j16<CR><CR><CR> :copen<CR>
 :map <silent> <F7> :make --check<CR><CR><CR> :copen <CR>
-:map <silent> <F9> :make -j16<CR><CR><CR> :copen <CR>
-:map <silent> <F10> :!ctags -R<CR><CR>
+:map <silent> <F9> :make src<CR><CR><CR> :copen <CR>
+:map <silent> <F10> :!ctags -R --languages=C,C++<CR><CR>
 :map <F12> :qa!<CR><CR>
 map <C-K> :pyf ~/bin/clang-format.py<CR>
 imap <C-K> <ESC>:pyf ~/bin/clang-format.py<CR>i
