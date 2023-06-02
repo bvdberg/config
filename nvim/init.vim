@@ -38,25 +38,15 @@ match ExtraWhitespace /\s\+$/
 
 call plug#begin()
 "Plug 'neovim/nvim-lspconfig'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 "Plug 'Yohannfra/Vim-Goto-Header'
 Plug 'nvim-lua/plenary.nvim' " required dependency for Ouroboros
 Plug 'jakemason/ouroboros'
 Plug 'c2lang/c2.vim'
+Plug 'honza/vim-snippets'
 call plug#end()
 
-"lua require("lsp_config")
 
-"call plug#begin(“~/.vim/plugged”)
-" Plugin Section
-" Plug 'dracula/vim'
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'honza/vim-snippets'
-" Plug 'scrooloose/nerdtree'
-" Plug 'preservim/nerdcommenter'
-" Plug 'mhinz/vim-startify'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"call plug#end()
 
 " move line or visually selected block - alt+j/k
 inoremap <A-j> <Esc>:m .+1<CR>==gi
@@ -72,7 +62,15 @@ vnoremap <A-k> :m '<-2<CR>gv=gv" move split panes to left/bottom/top/right
  nnoremap <C-k> <C-w>k
  nnoremap <C-l> <C-w>l
 
-map <silent> <F8> :make<CR><CR> :copen<CR>
+map <silent> <F3> :Rg <CR> :copen <CR>
+map <silent> <F4> :cn <CR>
+map <silent> <F5> :ccl <CR>
+map <silent> <F6> :make -C build -j16<CR><CR><CR> :copen<CR>
+map <silent> <F7> :make --fast<CR><CR><CR> :copen <CR>
+map <silent> <F8> :make --check<CR><CR><CR> :copen <CR>
+map <silent> <F9> :make src<CR><CR><CR> :copen <CR>
+map <silent> <F10> :!ctags -R --languages=C,C++<CR><C
+map <silent> <F10> :!ctags -R --languages=C,C++<CR><CR>
 map <silent> <F12> : qa!<CR>
 
 " Press i to enter insert mode, and ii to exit insert mode.
@@ -84,7 +82,9 @@ map <silent> <F12> : qa!<CR>
 
 " Ouroboros allows switching between C/Cpp and header file with Ctrl-h
 autocmd! Filetype c,cpp map<buffer> <C-h> :Ouroboros<CR>
-autocmd! Filetype c2 map<buffer> <C-h> :C2TagResult<CR>
+autocmd! Filetype c2 map<buffer> <C-h> :C2TagDef<CR>
+
+cnoreabbrev c2t C2SymbolDef
 
 " open file in a text by placing text and gf
 nnoremap gf :vert winc f<cr>" copies filepath to clipboard by pressing yf
@@ -95,3 +95,4 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
+
