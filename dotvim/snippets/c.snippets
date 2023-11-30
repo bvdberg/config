@@ -105,6 +105,12 @@ snippet pr
 # fprintf (again, this isn't as nice as TextMate's version, but it works)
 snippet fpr
 	fprintf(${1:stderr}, "${2:%s}\n"${3});${4}
+snippet deb
+	debug_printf("\n${1}");
+snippet sw
+	debug_swo_printf("\n${1}");
+snippet rtt
+	debug_rtt_printf("${1}\n");
 snippet .
 	[${1}]${2}
 snippet un
